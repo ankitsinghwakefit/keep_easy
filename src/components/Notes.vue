@@ -1,18 +1,29 @@
 <template>
   <div class="body">
+    <h3>Keep Notes...</h3>
     <input
       placeholder="Take a note..."
       class="input-box"
       v-model="newNote"
       @keypress.enter="saveNote"
     />
-    <div v-for="(note,index) in allNotes" :key="index" class="notes-item">
-     <div class="note-bar-wrapper">
-        <div v-if="!note.edit" @dblclick="editNote(note)" class="notes-data-bar">
-          {{note.body}}
+    <div v-for="(note, index) in allNotes" :key="index" class="notes-item">
+      <div class="note-bar-wrapper">
+        <div
+          v-if="!note.edit"
+          @dblclick="editNote(note)"
+          class="notes-data-bar"
+        >
+          {{ note.body }}
         </div>
-        <input v-else class="notes-editor" @blur="doneEdit(note)" @keypress.enter="doneEdit(note)" v-model="note.body"/>
-     </div>
+        <input
+          v-else
+          class="notes-editor"
+          @blur="doneEdit(note)"
+          @keypress.enter="doneEdit(note)"
+          v-model="note.body"
+        />
+      </div>
       <div @click="deleteNote(index)" class="remove-icon">
         &times;
       </div>
@@ -32,20 +43,20 @@ export default {
   methods: {
     saveNote() {
       this.allNotes.push({
-        body:this.newNote,
-        edit:false
-        })
-      this.newNote = ''
+        body: this.newNote,
+        edit: false,
+      });
+      this.newNote = "";
     },
-    deleteNote(index){
-      this.allNotes.splice(index,1)
+    deleteNote(index) {
+      this.allNotes.splice(index, 1);
     },
-    editNote(data){
-      data.edit = true
+    editNote(data) {
+      data.edit = true;
     },
-    doneEdit(newData){
-      newData.edit = false
-    }
+    doneEdit(newData) {
+      newData.edit = false;
+    },
   },
 };
 </script>
@@ -91,7 +102,7 @@ select:focus {
   border-radius: 8px;
   background-color: #fff;
   border: 1px solid #e0e0e0;
-  min-height: 16px;
+  min-height: 34px;
   overflow: hidden;
 }
 .remove-icon {
@@ -106,9 +117,16 @@ select:focus {
   border: none;
   font-size: 16px;
 }
-.notes-editor:focus{
+.notes-editor:focus {
   outline: none;
   color: #202124;
   font-size: 16px;
+}
+.notes-notes-data-bar {
+  letter-spacing: .01428571em;
+    font-family: Helvetica;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
 }
 </style>

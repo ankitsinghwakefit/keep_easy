@@ -123,10 +123,10 @@ select:focus {
   font-size: 16px;
 }
 .notes-notes-data-bar {
-  letter-spacing: .01428571em;
-    font-family: Helvetica;
-    font-size: .875rem;
-    font-weight: 400;
-    line-height: 1.25rem;
+  letter-spacing: 0.01428571em;
+  font-family: Helvetica;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
 }
 </style>

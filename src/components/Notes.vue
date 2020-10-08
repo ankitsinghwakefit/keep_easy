@@ -10,7 +10,7 @@
       <div class="notes-data-bar">
         {{note}}
       </div>
-      <div class="remove-icon">
+      <div @click="deleteNote(index)" class="remove-icon">
         &times;
       </div>
     </div>
@@ -29,7 +29,11 @@ export default {
   methods: {
     saveNote() {
       this.allNotes.push(this.newNote)
+      this.newNote = ''
     },
+    deleteNote(index){
+      this.allNotes.splice(index,1)
+    }
   },
 };
 </script>

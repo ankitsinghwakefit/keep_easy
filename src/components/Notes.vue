@@ -1,14 +1,14 @@
 <template>
   <div class="body">
-    <input 
-    placeholder="Take a note..." 
-    class="input-box" 
-    v-model="newNote"
-    @keypress.enter="saveNote"
+    <input
+      placeholder="Take a note..."
+      class="input-box"
+      v-model="newNote"
+      @keypress.enter="saveNote"
     />
-    <div class="notes-item">
-      <div>
-        some notese here
+    <div v-for="(note,index) in allNotes" :key="index" class="notes-item">
+      <div class="notes-data-bar">
+        {{note}}
       </div>
       <div class="remove-icon">
         &times;
@@ -27,9 +27,9 @@ export default {
     };
   },
   methods: {
-    saveNote(){
-      alert('hii')
-    }
+    saveNote() {
+      this.allNotes.push(this.newNote)
+    },
   },
 };
 </script>

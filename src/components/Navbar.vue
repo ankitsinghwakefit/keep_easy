@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    
+    <hr>
   </div>
 </template>
 
@@ -21,7 +21,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.input-note {
-    width: 650px;
-}
+
 </style>

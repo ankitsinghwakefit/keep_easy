@@ -1,31 +1,45 @@
 <template>
   <div class="body">
-    <h3>Keep Notes...</h3>
-    <input
-      placeholder="Take a note..."
-      class="input-box"
-      v-model="newNote"
-      @keypress.enter="saveNote"
-    />
-    <div v-for="(note, index) in allNotes" :key="index" class="notes-item">
-      <div class="note-bar-wrapper">
-        <div
-          v-if="!note.edit"
-          @dblclick="editNote(note)"
-          class="notes-data-bar"
-        >
-          {{ note.body }}
+    <div class="instruction-screen" v-if="toggle">
+      <h3>
+        Instructions : How to use our Notepad to keep all your notes at a place.
+      </h3>
+      <ul>
+        <li>Type new note in Input box.</li>
+        <li>Done! Press enter to save.</li>
+        <li>Want to update note? Double click on note to edit.</li>
+        <li>Yes!!! yon can delete note by clicking on X</li>
+      </ul>
+      <button @click="toggleScreen" class="btn">Let's Try!</button>
+    </div>
+    <div v-if="!toggle" class="Notepad">
+      <h3>Keep Notes...</h3>
+      <input
+        placeholder="Take a note..."
+        class="input-box"
+        v-model="newNote"
+        @keypress.enter="saveNote"
+      />
+      <div v-for="(note, index) in allNotes" :key="index" class="notes-item">
+        <div class="note-bar-wrapper">
+          <div
+            v-if="!note.edit"
+            @dblclick="editNote(note)"
+            class="notes-data-bar"
+          >
+            {{ note.body }}
+          </div>
+          <input
+            v-else
+            class="notes-editor"
+            @blur="doneEdit(note)"
+            @keypress.enter="doneEdit(note)"
+            v-model="note.body"
+          />
         </div>
-        <input
-          v-else
-          class="notes-editor"
-          @blur="doneEdit(note)"
-          @keypress.enter="doneEdit(note)"
-          v-model="note.body"
-        />
-      </div>
-      <div @click="deleteNote(index)" class="remove-icon">
-        &times;
+        <div @click="deleteNote(index)" class="remove-icon">
+          &times;
+        </div>
       </div>
     </div>
   </div>
@@ -36,6 +50,7 @@ export default {
   name: "Notes",
   data() {
     return {
+      toggle: true,
       newNote: "",
       allNotes: [],
     };
@@ -56,6 +71,9 @@ export default {
     },
     doneEdit(newData) {
       newData.edit = false;
+    },
+    toggleScreen() {
+      this.toggle = false;
     },
   },
 };
@@ -128,5 +146,18 @@ select:focus {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.25rem;
+}
+.Instruction {
+  margin-top: 300px;
+}
+.instruction-screen {
+  text-align: left;
+}
+.btn {
+  margin-top: 30px;
+  width: 100px;
+  height: 35px;
+  font-size: 18px;
+  border-radius: 17px;
 }
 </style>

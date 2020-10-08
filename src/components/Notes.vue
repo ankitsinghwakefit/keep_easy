@@ -7,9 +7,12 @@
       @keypress.enter="saveNote"
     />
     <div v-for="(note,index) in allNotes" :key="index" class="notes-item">
-      <div class="notes-data-bar">
-        {{note}}
-      </div>
+     <div class="note-bar-wrapper">
+        <div v-if="!note.edit" @dblclick="editNote(note)" class="notes-data-bar">
+          {{note.body}}
+        </div>
+        <input v-else class="notes-editor" @blur="doneEdit(note)" @keypress.enter="doneEdit(note)" v-model="note.body"/>
+     </div>
       <div @click="deleteNote(index)" class="remove-icon">
         &times;
       </div>
@@ -28,11 +31,20 @@ export default {
   },
   methods: {
     saveNote() {
-      this.allNotes.push(this.newNote)
+      this.allNotes.push({
+        body:this.newNote,
+        edit:false
+        })
       this.newNote = ''
     },
     deleteNote(index){
       this.allNotes.splice(index,1)
+    },
+    editNote(data){
+      data.edit = true
+    },
+    doneEdit(newData){
+      newData.edit = false
     }
   },
 };
@@ -80,9 +92,23 @@ select:focus {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   min-height: 16px;
+  overflow: hidden;
 }
 .remove-icon {
   cursor: pointer;
   margin-left: 14px;
+}
+.note-bar-wrapper {
+  display: flex;
+  align-items: center;
+}
+.notes-editor {
+  border: none;
+  font-size: 16px;
+}
+.notes-editor:focus{
+  outline: none;
+  color: #202124;
+  font-size: 16px;
 }
 </style>

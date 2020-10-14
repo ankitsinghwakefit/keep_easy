@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-      <h1>Cloudfinch Information Technologies</h1>
+      <h1>Singh Information Technologies</h1>
     <hr>
   </div>
 </template>
